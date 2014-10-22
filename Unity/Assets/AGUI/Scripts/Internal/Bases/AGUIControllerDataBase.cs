@@ -31,7 +31,8 @@ public class AGUIControllerDataBase
 {
 	//TODO: Design, AGUIControllerDataBase to use as base class.
 	//TODO: Hover support!
-	//TODO: Screen Space position!
+
+	//FIXME: Some weird positions when controller is rotated 90 degrees on Y axis! (Current fix -> use ScreenPosition instead of Position!)
 
 	#region Header
 
@@ -345,7 +346,8 @@ public class AGUIControllerDataBase
 		
 		if(m_linkedBases[index] != null && m_statues[index] != ControlStatus.Idle)
 		{
-			m_linkedBases[index].Position = m_positions[index] = m_controller.Screen2World( Input.mousePosition, m_controllers[index] );
+			m_linkedBases[index].ScreenPosition = Input.mousePosition;
+			m_linkedBases[index].Position = m_positions[index] = m_controller.ScreenToWorld( Input.mousePosition, m_controllers[index] );
 		}
 	}
 	
@@ -413,15 +415,17 @@ public class AGUIControllerDataBase
 
 			if(m_linkedBases[fingerID] != null)
 			{
-				m_positions[fingerID] = m_controller.Screen2World( touch.position, m_controllers[fingerID] );
+				m_positions[fingerID] = m_controller.ScreenToWorld( touch.position, m_controllers[fingerID] );
 
 				if(m_linkedBases[fingerID].Position == Vector3.zero)
 				{
+					m_linkedBases[fingerID].ScreenPosition = touch.position;
 					m_linkedBases[fingerID].Position = m_positions[fingerID];
 				}
 				else
 				{
-					m_linkedBases[fingerID].Position = Vector3.Lerp(m_linkedBases[fingerID].Position,m_positions[fingerID],0.5f);
+					m_linkedBases[fingerID].ScreenPosition = Vector3.Lerp(m_linkedBases[fingerID].ScreenPosition, touch.position, 0.5f);
+					m_linkedBases[fingerID].Position = Vector3.Lerp(m_linkedBases[fingerID].Position, m_positions[fingerID], 0.5f);
 				}
 
 				m_linkedBases[fingerID].Touches.Add(touch);
