@@ -26,7 +26,6 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Renderer))]
 [AddComponentMenu("AGUI/UI/Utilities/Scale")]
 [ExecuteInEditMode]
 public sealed class GUScale : GUtilitiesBase 
@@ -175,7 +174,7 @@ public sealed class GUScale : GUtilitiesBase
 		}
 		
 		Vector3 size = Vector3.zero;
-		
+
 		float w = camera.aspect / m_orginalBounds.x * camera.orthographicSize * 2 * scale.x;
 		float h = 1 / m_orginalBounds.y * camera.orthographicSize * 2 * scale.y;
 		
@@ -252,7 +251,10 @@ public sealed class GUScale : GUtilitiesBase
 
 		Renderer cachedRenderer = transform.renderer;
 		m_box = GetComponent<AGUIBox>();
-		
+
+		Quaternion orginalRotation = transform.rotation;
+		transform.rotation = Quaternion.identity;
+
 		m_orginalScale = transform.localScale = Vector3.one;
 		
 		if(m_box)
@@ -268,6 +270,8 @@ public sealed class GUScale : GUtilitiesBase
 		{
 			m_orginalBounds = transform.localScale;
 		}
+
+		transform.rotation = orginalRotation;
 	}
 	
 	/// <summary>
