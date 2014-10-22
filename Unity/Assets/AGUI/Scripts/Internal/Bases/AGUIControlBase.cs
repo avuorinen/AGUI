@@ -56,6 +56,7 @@ public class AGUIControlBase : MonoBehaviour
 		}
 		
 		public Vector3 position = Vector3.zero;
+		public Vector3 screenPosition = Vector3.zero;
 		public AGUIController caller = null;
 		public List<AGUIControlBase> bases = new List<AGUIControlBase>();
 		
@@ -136,6 +137,25 @@ public class AGUIControlBase : MonoBehaviour
 		{
 			CheckLink();
 			m_link.position = value;
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the screen space Position.
+	/// </summary>
+	/// <value>The screen position.</value>
+	public Vector3 ScreenPosition
+	{
+		get
+		{
+			CheckLink();
+			return m_link.screenPosition;
+		}
+		
+		set
+		{
+			CheckLink();
+			m_link.screenPosition = value;
 		}
 	}
 
