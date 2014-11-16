@@ -312,7 +312,7 @@ public class AGUIController : MonoBehaviour
 
 	#region Body
 
-	public Vector3 Screen2World(Vector3 position, AGUIController controller = null)
+	public Vector3 ScreenToWorld(Vector3 position, AGUIController controller = null)
 	{	
 		if(controller)
 		{
@@ -340,7 +340,7 @@ public class AGUIController : MonoBehaviour
 		AGUIController controller = this;
 		AGUIControlBase controlBase = null;
 
-		Vector3 checkPosition = Screen2World(position);
+		Vector3 checkPosition = ScreenToWorld(position);
 
 		if(controllerType == ControllerType.NonShared)
 		{
@@ -402,7 +402,7 @@ public class AGUIController : MonoBehaviour
 		
 		foreach(AGUIController controller in m_sharedAGUIControllers)
 		{
-			checkPosition = controller.Screen2World(position);
+			checkPosition = controller.ScreenToWorld(position);
 			
 			if(!ValidatePosition(checkPosition,controller.camera))
 			{

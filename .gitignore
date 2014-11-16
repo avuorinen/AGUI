@@ -12,3 +12,5 @@
 /*.pidb
 /*.booproj
 Unity/ProjectSettings/
+*.csproj
+*.sln
