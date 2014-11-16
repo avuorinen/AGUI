@@ -26,8 +26,8 @@
 using UnityEngine;
 using System.Collections;
 
-[AddComponentMenu("AGUI/UI/Utilities/Scale")]
 [ExecuteInEditMode]
+[AddComponentMenu("AGUI/UI/Utilities/Scale")]
 public sealed class GUScale : GUtilitiesBase 
 {
 	//TODO: Run in editor (review), Run once
