@@ -113,7 +113,6 @@ public class ShoeBoxUtilities
 
 	private static void UpdateSprite(TextureImporter assetImporter, string parse, string type, Vector2 size)
 	{
-		assetImporter.textureType = TextureImporterType.Sprite;
 		assetImporter.spriteImportMode = SpriteImportMode.Multiple;
 
 		List<SpriteMetaData> spriteData = new List<SpriteMetaData>();
@@ -244,8 +243,6 @@ public class ShoeBoxUtilities
 						//Just making sure...
 						current.alignment = (int)UnityEngine.SpriteAlignment.Center;
 					}
-					
-
 
 					Rect rect = new Rect();
 
@@ -260,7 +257,6 @@ public class ShoeBoxUtilities
 
 					if(!spriteData.Contains(current))
 					{
-						
 						spriteData.Add(current);
 					}
 				}
