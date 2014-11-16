@@ -1,4 +1,4 @@
-﻿// ShoeBoxUtilities.cs
+// ShoeBoxUtilities.cs
 //
 // Author:
 //       Atte Vuorinen <AtteVuorinen@gmail.com>
@@ -118,6 +118,15 @@ public class ShoeBoxUtilities
 
 		List<SpriteMetaData> spriteData = new List<SpriteMetaData>();
 
+		Dictionary<string, SpriteMetaData> oldSprites = new Dictionary<string, SpriteMetaData>();
+
+		//Add old sprites.
+
+		foreach(SpriteMetaData metaData in assetImporter.spritesheet)
+		{
+			oldSprites.Add(metaData.name, metaData);
+		}
+
 		if(type.Equals("") || type.Equals("txt"))
 		{
 			if(parse.Contains("{"))
@@ -152,10 +161,17 @@ public class ShoeBoxUtilities
 
 					current.name = line.Substring(startIndex,lenght);
 
-					current.pivot = new Vector2(0.5f,0.5f);
+					if(oldSprites.ContainsKey(current.name))
+					{
+						current = oldSprites[current.name];
+					}
+					else
+					{
+						current.pivot = new Vector2(0.5f,0.5f);
 
-					//Just making sure...//
-					current.alignment = (int)UnityEngine.SpriteAlignment.Center;
+						//Just making sure...//
+						current.alignment = (int)UnityEngine.SpriteAlignment.Center;
+					}
 				}
 
 				if(line.Contains("frame") && !line.Contains("frames"))
@@ -198,7 +214,6 @@ public class ShoeBoxUtilities
 
 					if(!spriteData.Contains(current))
 					{
-
 						spriteData.Add(current);
 					}
 				}
@@ -218,10 +233,19 @@ public class ShoeBoxUtilities
 					
 					current.name = name.Substring(0,lenght);
 
-					current.pivot = new Vector2(0.5f,0.5f);
+					if(oldSprites.ContainsKey(current.name))
+					{
+						current = oldSprites[current.name];
+					}
+					else
+					{
+						current.pivot = new Vector2(0.5f,0.5f);
+
+						//Just making sure...
+						current.alignment = (int)UnityEngine.SpriteAlignment.Center;
+					}
 					
-					//Just making sure...//
-					current.alignment = (int)UnityEngine.SpriteAlignment.Center;
+
 
 					Rect rect = new Rect();
 
