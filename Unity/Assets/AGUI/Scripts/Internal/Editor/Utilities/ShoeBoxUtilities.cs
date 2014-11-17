@@ -113,6 +113,8 @@ public class ShoeBoxUtilities
 
 	private static void UpdateSprite(TextureImporter assetImporter, string parse, string type, Vector2 size)
 	{
+		//For some weird reason Importer won't apply changes without editing textureType.
+		assetImporter.textureType = assetImporter.textureType;
 		assetImporter.spriteImportMode = SpriteImportMode.Multiple;
 
 		List<SpriteMetaData> spriteData = new List<SpriteMetaData>();
