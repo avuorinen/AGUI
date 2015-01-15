@@ -52,7 +52,7 @@ public sealed class GUScale : GUtilitiesBase
 		Width,
 
 		/// <summary>
-		/// scale height.
+		/// Scale height.
 		/// </summary>
 		Height
 	}
